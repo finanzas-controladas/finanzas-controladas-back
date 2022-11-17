@@ -37,5 +37,4 @@ export class User {
   checkFields() {
     this.email = this.email.toLowerCase().trim();
   }
-
 }
