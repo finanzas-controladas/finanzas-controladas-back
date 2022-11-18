@@ -2,7 +2,7 @@ import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsEnum, IsDate } from "class-validator";
 import { Type } from 'class-transformer'
-import { TransactionType } from "../enums/transaction-type.enum";
+import { TransactionTypes } from "../enums/transaction-type.enum";
 
 export class CreateTransactionDto {
     @ApiProperty()
@@ -19,6 +19,6 @@ export class CreateTransactionDto {
     date: Date
 
     @ApiProperty()
-    @IsEnum(TransactionType)
-    transactionType: TransactionType
+    @IsEnum(TransactionTypes)
+    transactionType: TransactionTypes
 }

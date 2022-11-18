@@ -1,6 +1,6 @@
-import { User } from "src/users/entities/user.entity";
+import { User } from "../../users/entities/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { TransactionType } from "../enums/transaction-type.enum";
+import { TransactionTypes } from "../enums/transaction-type.enum";
 
 @Entity('transactions')
 export class Transaction {
@@ -24,9 +24,9 @@ export class Transaction {
     date: Date
 
     @Column('enum', {
-        enum: TransactionType
+        enum: TransactionTypes
     })
-    transactionType: TransactionType
+    transactionType: TransactionTypes
 
     @ManyToOne(() => User, (user) => user.transactions)
     user: User

@@ -27,7 +27,6 @@ export class AuthController {
   @ApiCreatedResponse({ description: 'User registered successfully ' })
   @ApiBadRequestResponse({ description: 'User already exists' })
   async registerUser(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
     return this.authService.registerUser(createUserDto);
   }
 
