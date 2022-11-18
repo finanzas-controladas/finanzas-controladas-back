@@ -5,6 +5,6 @@ import { User } from "./entities/user.entity";
 @Injectable()
 export class UsersService {
     async getBalance(user: User): Promise<ReadUserBalanceDto> {
-        return { balance: user.balance };
+        return { balance: Number(user.balance) };
     }
 }

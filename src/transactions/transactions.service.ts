@@ -25,14 +25,16 @@ export class TransactionsService {
         const { transactionType, amount } = createTransactionDto
         const newUserBalance =
             transactionType === TransactionTypes.Expense
-                ? user.balance - amount
-                : user.balance + amount
+                ? Number(user.balance) - amount
+                : Number(user.balance) + amount
         const updatedUser = await this.userRepository.preload({
             ...user,
             balance: newUserBalance
         })
         await this.userRepository.save(updatedUser);
         
+        createdTransaction.user.balance = newUserBalance
+
         return createdTransaction
     }
 
