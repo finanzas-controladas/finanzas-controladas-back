@@ -4,26 +4,42 @@ import { User } from "src/users/entities/user.entity";
 import { Repository } from "typeorm";
 import { CreateTransactionDto } from "./dto/create-transaction.dto";
 import { Transaction } from "./entities/transaction.entity";
+import { TransactionTypes } from "./enums/transaction-type.enum";
 
 @Injectable()
 export class TransactionsService {
     constructor(
         @InjectRepository(Transaction)
         private readonly transactionRepository: Repository<Transaction>,
-        ) {}
+        @InjectRepository(User)
+        private readonly userRepository: Repository<User>,
+    ) { }
 
     async create(createTransactionDto: CreateTransactionDto, user: User): Promise<Transaction> {
-        const transaction = this.transactionRepository.create({
+        const transactionToCreate = this.transactionRepository.create({
             ...createTransactionDto,
             user
         })
-        return await this.transactionRepository.save(transaction)
+        const createdTransaction = await this.transactionRepository.save(transactionToCreate)
+
+        const { transactionType, amount } = createTransactionDto
+        const newUserBalance =
+            transactionType === TransactionTypes.Expense
+                ? user.balance - amount
+                : user.balance + amount
+        const updatedUser = await this.userRepository.preload({
+            ...user,
+            balance: newUserBalance
+        })
+        await this.userRepository.save(updatedUser);
+        
+        return createdTransaction
     }
 
     async findAll(user: User): Promise<Transaction[]> {
         return await this.transactionRepository.find({
             where: {
-                user: { id: user.id}
+                user: { id: user.id }
             }
         })
     }

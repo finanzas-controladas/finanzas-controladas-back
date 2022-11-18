@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
 
 import { AppController } from './app.controller';
+import { UsersModule } from './users/users.module';
 
 
 export const getTypeOrmModuleOptions = async (config: ConfigService) => ({
@@ -17,7 +18,7 @@ export const getTypeOrmModuleOptions = async (config: ConfigService) => ({
     username: config.get<string>('DATABASE_USERNAME'),
     password: config.get<string>('DATABASE_PASSWORD'),
     database: config.get<string>('DATABASE_NAME'),
-    entities: [__dirname + './../../**/*.entity.js'],
+    entities: [__dirname + './../../**/*.entity.{.ts,.js}'],
     synchronize: config.get<boolean>('SYNC'),
     logging: config.get<boolean>('DATABASE_LOGGING'),
     logger: config.get<string>('DATABASE_LOGGER'),
@@ -50,8 +51,9 @@ export const getTypeOrmModuleOptions = async (config: ConfigService) => ({
             inject: [ConfigService],
             useFactory: getTypeOrmModuleOptions,
         }),
-        TransactionsModule,
         AuthModule,
+        TransactionsModule,
+        UsersModule,
     ],
     controllers: [AppController]
 })

@@ -7,7 +7,7 @@ import { TransactionsController } from "./transactions.controller";
 import { TransactionsService } from "./transactions.service";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Transaction, User]), AuthModule],
+    imports: [TypeOrmModule.forFeature([Transaction]), AuthModule],
     controllers: [TransactionsController],
     providers: [TransactionsService]
 })

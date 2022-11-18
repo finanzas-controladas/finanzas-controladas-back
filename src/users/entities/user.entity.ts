@@ -1,4 +1,4 @@
-import { Transaction } from 'src/transactions/entities/transaction.entity';
+import { Transaction } from '../../transactions/entities/transaction.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -28,7 +28,12 @@ export class User {
     select: false,
   })
   password: string;
-  
+
+  @Column('decimal', {
+    default: 0,
+  })
+  balance: number
+
   @OneToMany(() => Transaction, (transaction) => transaction.user)
   transactions: Transaction[]
 
