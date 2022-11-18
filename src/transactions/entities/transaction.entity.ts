@@ -13,7 +13,7 @@ export class Transaction {
     })
     note?: string
 
-    @Column('double', {
+    @Column('decimal', {
         nullable: false,
     })
     amount: number

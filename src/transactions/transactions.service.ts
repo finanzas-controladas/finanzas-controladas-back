@@ -19,4 +19,12 @@ export class TransactionsService {
         })
         return await this.transactionRepository.save(transaction)
     }
+
+    async findAll(user: User): Promise<Transaction[]> {
+        return await this.transactionRepository.find({
+            where: {
+                user: { id: user.id}
+            }
+        })
+    }
 }

@@ -1,12 +1,11 @@
 import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDateString, IsNumber, IsString, IsEnum } from "class-validator";
+import { IsNumber, IsEnum, IsDate } from "class-validator";
 import { Type } from 'class-transformer'
 import { TransactionType } from "../enums/transaction-type.enum";
 
 export class CreateTransactionDto {
     @ApiProperty()
-    @IsString()
     @Optional()
     note?: string
     
@@ -15,7 +14,7 @@ export class CreateTransactionDto {
     amount: number
 
     @ApiProperty()
-    @IsDateString()
+    @IsDate()
     @Type(() => Date)
     date: Date
 
