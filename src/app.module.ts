@@ -10,7 +10,6 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 
-
 export const getTypeOrmModuleOptions = async (config: ConfigService) =>
   ({
     type: 'postgres',
