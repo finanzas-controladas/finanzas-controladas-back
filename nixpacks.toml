@@ -1,7 +1,7 @@
-[phases.install]
+[install]
 cmd = 'npm i'
 
-[phases.build]
+[build]
 cmd = 'npm run build'
 
 [start]
