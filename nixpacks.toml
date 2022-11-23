@@ -1,2 +1,8 @@
+[phases.install]
+cmd = 'npm i'
+
+[phases.build]
+cmd = 'npm run build'
+
 [start]
-cmd = 'pnpm run start:prod'
+cmd = 'npm run start:prod'
