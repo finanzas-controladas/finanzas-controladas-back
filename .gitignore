@@ -1,6 +1,10 @@
 # Environment
 .env
 
+# Custom
+# pnpm can be used for development
+pnpm-lock.yaml # Use npm for production
+
 # compiled output
 /dist
 /node_modules
