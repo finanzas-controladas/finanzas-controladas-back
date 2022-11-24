@@ -23,6 +23,7 @@ export const getTypeOrmModuleOptions = async (config: ConfigService) =>
     logging: config.get<boolean>('DATABASE_LOGGING'),
     logger: config.get<string>('DATABASE_LOGGER'),
     autoLoadEntities: true,
+    ssl: config.get<string>('DATABASE_SSL') === 'true',
   } as TypeOrmModuleAsyncOptions);
 
 @Module({
