@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 
-import * as Joi from 'joi';
-
 import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
 
@@ -31,18 +29,6 @@ export const getTypeOrmModuleOptions = async (config: ConfigService) =>
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env', '.env.production'],
-      validationSchema: Joi.object({
-        NODE_ENV: Joi.string()
-          .valid('development', 'staging', 'test', 'production')
-          .default('development'),
-        DATABASE_NAME: Joi.string().required(),
-        DATABASE_PASSWORD: Joi.string().required(),
-        DATABASE_HOST: Joi.string().required(),
-        DATABASE_PORT: Joi.number().required(),
-        DATABASE_USERNAME: Joi.string().required(),
-        DATABASE_LOGGING: Joi.boolean().required(),
-        DATABASE_LOGGER: Joi.string().required(),
-      }),
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
