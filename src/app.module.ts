@@ -23,7 +23,7 @@ export const getTypeOrmModuleOptions = () =>
     synchronize: process.env.SYNC === 'true',
     logging: process.env.DATABASE_LOGGING === 'true',
     logger: process.env.DATABASE_LOGGER,
-    autoLoadEntities: true,
+    autoLoadEntities: false,
     ssl: process.env.DATABASE_SSL === 'true',
     retryAttempts: 5,
     retryDelay: 5000,
