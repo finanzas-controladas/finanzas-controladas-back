@@ -18,7 +18,7 @@ export const getTypeOrmModuleOptions: TypeOrmModuleOptions = {
   username: process.env.DATABASE_USER ?? 'postgres',
   password: process.env.DATABASE_PASSWORD ?? 'fHD*h9yMJU4',
   database: process.env.DATABASE_NAME ?? 'FinanzasControladas',
-  entities: [__dirname + './../../**/*.entity.{.ts,.js}'],
+  entities: [__dirname + '/../../**/*.entity.{.ts,.js}'],
   synchronize: process.env.SYNC === 'true',
   logging: process.env.DATABASE_LOGGING === 'true',
   autoLoadEntities: true,
