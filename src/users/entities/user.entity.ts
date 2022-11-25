@@ -1,4 +1,4 @@
-import { Transaction } from '../../transactions/entities/transaction.entity';
+import { Transaction } from 'src/transactions/entities';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -32,10 +32,10 @@ export class User {
   @Column('decimal', {
     default: 0,
   })
-  balance: number
+  balance: number;
 
   @OneToMany(() => Transaction, (transaction) => transaction.user)
-  transactions: Transaction[]
+  transactions: Transaction[];
 
   @BeforeInsert()
   @BeforeUpdate()

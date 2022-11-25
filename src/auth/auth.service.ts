@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  Inject,
   InternalServerErrorException,
   Logger,
   UnauthorizedException,
@@ -16,13 +17,14 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { MessageHandler } from 'src/shared/enums/message-handler.enum';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { Repositories } from 'src/shared/constants';
 
 @Injectable()
 export class AuthService {
   logger: Logger = new Logger('AuthService');
 
   constructor(
-    @InjectRepository(User)
+    @Inject(Repositories.USER_REPOSITORY)
     private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
   ) {}
