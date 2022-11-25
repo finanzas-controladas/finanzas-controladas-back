@@ -11,25 +11,25 @@ import { UsersModule } from './users/users.module';
 export const getTypeOrmModuleOptions = async (config: ConfigService) =>
   ({
     type: 'postgres',
-    host: config.get<string>('DATABASE_HOST'),
-    port: config.get<number>('DATABASE_PORT'),
-    username: config.get<string>('DATABASE_USERNAME'),
-    password: config.get<string>('DATABASE_PASSWORD'),
-    database: config.get<string>('DATABASE_NAME'),
+    host: process.env.DATABASE_HOST,
+    port: process.env.DATABASE_PORT,
+    username: process.env.DATABASE_HOST,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
     entities: [__dirname + './../../**/*.entity.{.ts,.js}'],
-    synchronize: config.get<boolean>('SYNC'),
-    logging: config.get<boolean>('DATABASE_LOGGING'),
-    logger: config.get<string>('DATABASE_LOGGER'),
+    synchronize: process.env.SYNC,
+    logging: process.env.DATABASE_LOGGING,
+    logger: process.env.DATABASE_LOGGER,
     autoLoadEntities: true,
-    ssl: config.get<string>('DATABASE_SSL') === 'true',
+    ssl: process.env.DATABASE_SSL,
   } as TypeOrmModuleAsyncOptions);
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: ['.env', '.env.production'],
-    }),
+    // ConfigModule.forRoot({
+    //   isGlobal: true,
+    //   envFilePath: ['.env', '.env.production'],
+    // }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
