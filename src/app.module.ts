@@ -1,5 +1,9 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+import {
+  TypeOrmModule,
+  TypeOrmModuleAsyncOptions,
+  TypeOrmModuleOptions,
+} from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
@@ -7,21 +11,26 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 
-export const getTypeOrmModuleOptions = async () =>
+export const getTypeOrmModuleOptions = () =>
   ({
     type: 'postgres',
     host: process.env.DATABASE_HOST,
-    port: process.env.DATABASE_PORT,
+    port: Number(process.env.DATABASE_PORT),
     username: process.env.DATABASE_HOST,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
     entities: [__dirname + './../../**/*.entity.{.ts,.js}'],
-    synchronize: process.env.SYNC,
-    logging: process.env.DATABASE_LOGGING,
+    synchronize: process.env.SYNC === 'true',
+    logging: process.env.DATABASE_LOGGING === 'true',
     logger: process.env.DATABASE_LOGGER,
     autoLoadEntities: true,
-    ssl: process.env.DATABASE_SSL,
-  } as TypeOrmModuleAsyncOptions);
+    ssl: process.env.DATABASE_SSL === 'true',
+    retryAttempts: 5,
+    retryDelay: 5000,
+    toRetry: () => false,
+    keepConnectionAlive: true,
+    verboseRetryLog: true,
+  } as TypeOrmModuleOptions);
 
 @Module({
   imports: [
