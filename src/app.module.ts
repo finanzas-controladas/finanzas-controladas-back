@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
@@ -8,7 +7,7 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 
-export const getTypeOrmModuleOptions = async (config: ConfigService) =>
+export const getTypeOrmModuleOptions = async () =>
   ({
     type: 'postgres',
     host: process.env.DATABASE_HOST,
@@ -31,8 +30,8 @@ export const getTypeOrmModuleOptions = async (config: ConfigService) =>
     //   envFilePath: ['.env', '.env.production'],
     // }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
+      // imports: [ConfigModule],
+      // inject: [ConfigService],
       useFactory: getTypeOrmModuleOptions,
     }),
     AuthModule,
