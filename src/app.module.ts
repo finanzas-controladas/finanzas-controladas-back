@@ -21,7 +21,6 @@ export const getTypeOrmModuleOptions: TypeOrmModuleOptions = {
   entities: [__dirname + '/**/*.entity.{.ts,.js}'],
   synchronize: process.env.SYNC === 'true',
   logging: process.env.DATABASE_LOGGING === 'true',
-  autoLoadEntities: true,
   ssl: process.env.DATABASE_SSL === 'true',
   retryAttempts: 5,
 };
