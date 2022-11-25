@@ -29,7 +29,7 @@ async function bootstrap() {
 
   const logger = new Logger('Main');
   const PORT = 3000;
-  await app.listen(PORT, '0.0.0.0', () => {
+  await app.listen(process.env.PORT || PORT, '0.0.0.0', () => {
     logger.log(`API running on port: ${PORT}`);
   });
 }
