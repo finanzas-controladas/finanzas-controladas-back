@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse } from "@nestjs/swagger";
-import { GetUser } from "src/auth/decorators";
-import { MessageHandler } from "src/shared/enums/message-handler.enum";
-import { User } from "src/users/entities/user.entity";
 import { CreateTransactionDto } from "./dto/create-transaction.dto";
 import { TransactionsService } from "./transactions.service";
+import { User } from '../users/entities/user.entity';
+import { GetUser } from '../auth/decorators';
+import { MessageHandler } from '../shared/enums/message-handler.enum';
 
 @Controller('transaction')
 export class TransactionsController {

@@ -1,4 +1,3 @@
-import { Transaction } from '../../transactions/entities/transaction.entity';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -7,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Transaction } from '../../transactions/entities';
 
 @Entity('users')
 export class User {
@@ -32,10 +32,10 @@ export class User {
   @Column('decimal', {
     default: 0,
   })
-  balance: number
+  balance: number;
 
   @OneToMany(() => Transaction, (transaction) => transaction.user)
-  transactions: Transaction[]
+  transactions: Transaction[];
 
   @BeforeInsert()
   @BeforeUpdate()
