@@ -3,22 +3,23 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Repository } from 'typeorm';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
-import { User } from 'src/users/entities/user.entity';
 
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
-import { ConfigService } from '@nestjs/config';
-import { MessageHandler } from 'src/shared/enums/message-handler.enum';
-import { Repositories } from 'src/shared/constants';
+import * as dotenv from 'dotenv';
+import { Repositories } from '../../shared/constants';
+import { User } from '../../users/entities/user.entity';
+import { MessageHandler } from '../../shared/enums/message-handler.enum';
+
+dotenv.config({ path: '.env' });
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @Inject(Repositories.USER_REPOSITORY)
     private readonly userRepository: Repository<User>,
-    private readonly configService: ConfigService,
   ) {
     super({
-      secretOrKey: configService.get('JWT_SECRET'),
+      secretOrKey: process.env.JWT_SECRET,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }

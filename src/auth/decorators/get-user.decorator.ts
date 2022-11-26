@@ -3,7 +3,7 @@ import {
   ExecutionContext,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { MessageHandler } from 'src/shared/enums/message-handler.enum';
+import { MessageHandler } from '../../shared/enums/message-handler.enum';
 
 export const GetUser = createParamDecorator(
   (data: string, ctx: ExecutionContext) => {

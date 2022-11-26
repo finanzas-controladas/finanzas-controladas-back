@@ -1,7 +1,7 @@
-import { DATA_SOURCE, Repositories } from 'src/shared/constants';
-import { Transaction } from 'src/transactions/entities';
 import { DataSource } from 'typeorm';
 import { User } from './entities/user.entity';
+import { DATA_SOURCE, Repositories } from '../shared/constants';
+import { Transaction } from '../transactions/entities';
 
 export const userProviders = [
   {

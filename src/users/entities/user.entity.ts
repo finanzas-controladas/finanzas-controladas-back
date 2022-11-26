@@ -1,4 +1,3 @@
-import { Transaction } from 'src/transactions/entities';
 import {
   BeforeInsert,
   BeforeUpdate,
@@ -7,6 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Transaction } from '../../transactions/entities';
 
 @Entity('users')
 export class User {

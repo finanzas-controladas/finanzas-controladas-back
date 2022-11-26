@@ -5,8 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { DatabaseModule } from 'src/database/database.module';
-import { userProviders } from 'src/users/user.providers';
+import { DatabaseModule } from '../database/database.module';
+import { userProviders } from '../users/user.providers';
 
 @Module({
   imports: [
