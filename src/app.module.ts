@@ -5,10 +5,17 @@ import { TransactionsModule } from './transactions/transactions.module';
 
 import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
-import { DatabaseModule } from './database/database.module';
+import { AppConfigModule } from './config/app/app-config.module';
+import { TypeOrmConfigModule } from './config/typeorm/typeorm-config.module';
 
 @Module({
-  imports: [DatabaseModule, AuthModule, TransactionsModule, UsersModule],
+  imports: [
+    AppConfigModule,
+    TypeOrmConfigModule,
+    AuthModule,
+    UsersModule,
+    TransactionsModule,
+  ],
   controllers: [AppController],
 })
 export class AppModule {}

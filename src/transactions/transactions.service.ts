@@ -3,15 +3,15 @@ import { Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { Transaction } from './entities/transaction.entity';
 import { TransactionTypes } from './enums/transaction-type.enum';
-import { Repositories } from '../shared/constants';
 import { User } from '../users/entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class TransactionsService {
   constructor(
-    @Inject(Repositories.TRANSACTION_REPOSITORY)
+    @InjectRepository(Transaction)
     private readonly transactionRepository: Repository<Transaction>,
-    @Inject(Repositories.USER_REPOSITORY)
+    @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
 

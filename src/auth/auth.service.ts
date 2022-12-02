@@ -14,7 +14,6 @@ import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from './dto/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { Repositories } from '../shared/constants';
 import { User } from '../users/entities/user.entity';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { MessageHandler } from '../shared/enums/message-handler.enum';
@@ -24,7 +23,7 @@ export class AuthService {
   logger: Logger = new Logger('AuthService');
 
   constructor(
-    @Inject(Repositories.USER_REPOSITORY)
+    @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly jwtService: JwtService,
   ) {}
